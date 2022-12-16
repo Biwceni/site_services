@@ -16,7 +16,7 @@ export const CadastroEstruturaStyled = styled.div`
    width: 95%;
    max-width: 40rem;
    height: 95%;
-   max-height: 70rem;
+   max-height: 65rem;
    border-radius: 2rem;
    background-color: #fff;
 `;
