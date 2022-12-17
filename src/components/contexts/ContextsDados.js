@@ -26,7 +26,7 @@ export const ContextBase = ({ children }) => {
     const navigate = useNavigate()
 
     // Procedimento que vai servir para os dados de instanciamento da sessão serem salvos no Browser, indicando a ativação da mesma, sendo essa uma ação importante para se deixar ativa
-    api.defaults.withCredentials = true
+    // api.defaults.withCredentials = true
 
     // Função de carregamento de dados do Usuário ou Administrador logado na página
     useEffect(() => {
