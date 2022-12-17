@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import api from "../api_config/ApiConfig";
 
 // Criando um Context para a agregação do value
@@ -27,7 +26,7 @@ export const ContextBase = ({ children }) => {
     const navigate = useNavigate()
 
     // Procedimento que vai servir para os dados de instanciamento da sessão serem salvos no Browser, indicando a ativação da mesma, sendo essa uma ação importante para se deixar ativa
-    axios.defaults.withCredentials = true
+    api.defaults.withCredentials = true
 
     // Função de carregamento de dados do Usuário ou Administrador logado na página
     useEffect(() => {
