@@ -51,7 +51,7 @@ export const ContextBase = ({ children }) => {
         // Resgatando o Token salvo no localStorage do Browser
         const token = localStorage.getItem("token")
 
-        console.log("userDadosBD: ", userDadosBD)
+        console.log("sessaoAtiva: ", sessaoAtiva)
 
         // Se houver um Token ativo, indica que uma sessão está ativa, assim dependendo de qual sessão está ativa, os seus respectivos States vão ser carregados
         if (token) {
