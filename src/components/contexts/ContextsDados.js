@@ -26,7 +26,7 @@ export const ContextBase = ({ children }) => {
     const navigate = useNavigate()
 
     // Procedimento que vai servir para os dados de instanciamento da sessão serem salvos no Browser, indicando a ativação da mesma, sendo essa uma ação importante para se deixar ativa
-    api.defaults.withCredentials = false
+    // api.defaults.withCredentials = true
 
     // Função de carregamento de dados do Usuário ou Administrador logado na página
     useEffect(() => {
@@ -185,7 +185,7 @@ export const ContextBase = ({ children }) => {
         api.post("/login", {
             email: userDados.email,
             senha: userDados.senha
-        }, headers)
+        }, { withCredentials: true }, headers)
             .then((response) => {
                 // Quando o Admin ou o User forem confirmados, além de salvar os seus dados em um State, foi resgatado o Token recebido do servidor e salvo lo localStorage do Browser, para servir de parâmetro de instanciamento da sessão
                 if (response.data.loginAdmin) {
