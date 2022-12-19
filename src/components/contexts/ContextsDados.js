@@ -26,7 +26,7 @@ export const ContextBase = ({ children }) => {
     const navigate = useNavigate()
 
     // Procedimento que vai servir para os dados de instanciamento da sessão serem salvos no Browser, indicando a ativação da mesma, sendo essa uma ação importante para se deixar ativa
-    api.defaults.withCredentials = true
+    // api.defaults.withCredentials = true
 
     // Função de carregamento de dados do Usuário ou Administrador logado na página
     useEffect(() => {
@@ -86,26 +86,26 @@ export const ContextBase = ({ children }) => {
         } else {
 
             // Não havendo Token, mas a sessão estando ativa, o auxiliar da sessão criado anteriormente vai fazer essa verificação, para caso ocorra, além de voltar a página inicial, a sessão também será finalizada
-            // if (sessaoAtiva) {
-            //     const headers = {
-            //         'headers': {
-            //             'x-acess-token': token
-            //         }
-            //     }
+            if (sessaoAtiva) {
+                const headers = {
+                    'headers': {
+                        'x-acess-token': token
+                    }
+                }
 
-            //     api.get("/loginAuth", headers)
-            //         .then((response) => {
-            //             if (response.data.semToken) {
-            //                 setAtivarAviso(true)
-            //                 setMensagemAviso(response.data.msg)
-            //                 setTimeout(() => {
-            //                     navigate("/")
-            //                     setAtivarAviso(false)
-            //                 }, 2000)
-            //             }
-            //         })
-            //         .catch((err) => console.log(err))
-            // }
+                api.get("/loginAuth", headers)
+                    .then((response) => {
+                        if (response.data.semToken) {
+                            setAtivarAviso(true)
+                            setMensagemAviso(response.data.msg)
+                            setTimeout(() => {
+                                navigate("/")
+                                setAtivarAviso(false)
+                            }, 2000)
+                        }
+                    })
+                    .catch((err) => console.log(err))
+            }
 
             // Vai manter tanto o User como o Admin sem dados internos, servindo de precaução caso haja algum bug que possa manter seus dados ativos mesmo com o fim da sessão
             setUserDadosBD(null)
