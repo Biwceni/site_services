@@ -51,8 +51,6 @@ export const ContextBase = ({ children }) => {
         // Resgatando o Token salvo no localStorage do Browser
         const token = localStorage.getItem("token")
 
-        console.log("sessaoAtiva: ", sessaoAtiva)
-
         // Se houver um Token ativo, indica que uma sessão está ativa, assim dependendo de qual sessão está ativa, os seus respectivos States vão ser carregados
         if (token) {
             // Mandar o Token pelo headers para ser analisado no servidor
@@ -73,41 +71,41 @@ export const ContextBase = ({ children }) => {
                         setUserDadosBD(response.data.user)
                         setAdminDadosBD(null)
                     } 
-                    // else {
-                    //     setAtivarAviso(true)
-                    //     setMensagemAviso(response.data.msg)
-                    //     localStorage.removeItem("token")
-                    //     setTimeout(() => {
-                    //         navigate("/")
-                    //         setAtivarAviso(false)
-                    //     }, 2000)
-                    // }
+                    else {
+                        setAtivarAviso(true)
+                        setMensagemAviso(response.data.msg)
+                        localStorage.removeItem("token")
+                        setTimeout(() => {
+                            navigate("/")
+                            setAtivarAviso(false)
+                        }, 2000)
+                    }
                 })
                 .catch((err) => console.log(err))
         // Caso o Token não estiver ativo, então ele não vai carrgar nenhuma dado da sessão
         } else {
 
             // Não havendo Token, mas a sessão estando ativa, o auxiliar da sessão criado anteriormente vai fazer essa verificação, para caso ocorra, além de voltar a página inicial, a sessão também será finalizada
-            // if (sessaoAtiva) {
-            //     const headers = {
-            //         'headers': {
-            //             'x-acess-token': token
-            //         }
-            //     }
+            if (sessaoAtiva) {
+                const headers = {
+                    'headers': {
+                        'x-acess-token': token
+                    }
+                }
 
-            //     api.get("/login", headers)
-            //         .then((response) => {
-            //             if (response.data.semToken) {
-            //                 setAtivarAviso(true)
-            //                 setMensagemAviso(response.data.msg)
-            //                 setTimeout(() => {
-            //                     navigate("/")
-            //                     setAtivarAviso(false)
-            //                 }, 2000)
-            //             }
-            //         })
-            //         .catch((err) => console.log(err))
-            // }
+                api.get("/login", headers)
+                    .then((response) => {
+                        if (response.data.semToken) {
+                            setAtivarAviso(true)
+                            setMensagemAviso(response.data.msg)
+                            setTimeout(() => {
+                                navigate("/")
+                                setAtivarAviso(false)
+                            }, 2000)
+                        }
+                    })
+                    .catch((err) => console.log(err))
+            }
 
             // Vai manter tanto o User como o Admin sem dados internos, servindo de precaução caso haja algum bug que possa manter seus dados ativos mesmo com o fim da sessão
             setUserDadosBD(null)
