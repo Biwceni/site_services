@@ -134,7 +134,7 @@ export const ContextBase = ({ children }) => {
             })
             .catch((error) => console.log(error))
     // Todo esse procedimento só vai ser ativo quando houver alguma mudança no navigate ou no listarItens
-    }, [navigate, listarItens])
+    }, [navigate])
 
     // Instanciando a função cadastro
     const cadastro = (userDados) => {
