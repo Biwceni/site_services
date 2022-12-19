@@ -60,7 +60,7 @@ export const ContextBase = ({ children }) => {
                 }
             }
 
-            api.get("/login", headers)
+            api.get("/loginAuth", headers)
                 .then((response) => {
                     // Carregando os dados do Admin ou do User ativo, caso o tempo da sessão acabe ou dê algum erro de validação do Token, a sessão vai ser encerrada
                     if (response.data.authAdmin) {
@@ -93,7 +93,7 @@ export const ContextBase = ({ children }) => {
                     }
                 }
 
-                api.get("/login", headers)
+                api.get("/loginAuth", headers)
                     .then((response) => {
                         if (response.data.semToken) {
                             setAtivarAviso(true)
