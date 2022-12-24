@@ -8,7 +8,7 @@ export const CardUserStyled = styled.div`
     align-items: center; 
     justify-content: center;
     width: 100%;
-    max-width: 25rem;
+    min-width: 25rem;
 
     div{
         padding: 1.5rem;
