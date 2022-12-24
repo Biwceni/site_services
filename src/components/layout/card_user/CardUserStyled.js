@@ -15,7 +15,6 @@ export const CardUserStyled = styled.div`
         color: #fff;
         font-weight: bold;
         width: 100%;
-        border: 2px solid black;
     }
 
     div{
