@@ -10,14 +10,16 @@ export const CardUserStyled = styled.div`
     width: 100%;
     min-width: 25rem;
 
-    div{
-        padding: 1.5rem;
-    }
-
     p{
         font-size: 2rem;
         color: #fff;
         font-weight: bold;
+        width: 100%;
+        border: 2px solid black;
+    }
+
+    div{
+        padding: 1.5rem;
     }
 
     button{
