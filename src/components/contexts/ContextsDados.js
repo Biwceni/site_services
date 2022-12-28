@@ -26,7 +26,7 @@ export const ContextBase = ({ children }) => {
     const navigate = useNavigate()
 
     // Procedimento que vai servir para os dados de instanciamento da sessão serem salvos no Browser, indicando a ativação da mesma, sendo essa uma ação importante para se deixar ativa
-    // api.defaults.withCredentials = true
+    api.defaults.withCredentials = true
 
     // Função de carregamento de dados do Usuário ou Administrador logado na página
     useEffect(() => {
@@ -38,7 +38,7 @@ export const ContextBase = ({ children }) => {
         }
 
         // Recebendo a confirmação se a sessão do User ou do Admin está ativa ou não, vai servir como uma função auxiliar
-        api.get("/confirmarSession", {withCredentials: true},headersBase)
+        api.get("/confirmarSession", headersBase)
             .then((response) => {
                 if (response.data.sessionAtiva) {
                     setSessaoAtiva(response.data.sessionAtiva)
@@ -60,7 +60,7 @@ export const ContextBase = ({ children }) => {
                 }
             }
 
-            api.get("/loginAuth", {withCredentials: true}, headers)
+            api.get("/loginAuth", headers)
                 .then((response) => {
                     // Carregando os dados do Admin ou do User ativo, caso o tempo da sessão acabe ou dê algum erro de validação do Token, a sessão vai ser encerrada
                     if (response.data.authAdmin) {
@@ -93,7 +93,7 @@ export const ContextBase = ({ children }) => {
                     }
                 }
 
-                api.get("/loginAuth", {withCredentials: true}, headers)
+                api.get("/loginAuth", headers)
                     .then((response) => {
                         if (response.data.semToken) {
                             setAtivarAviso(true)
@@ -152,7 +152,7 @@ export const ContextBase = ({ children }) => {
             nome: userDados.nome,
             email: userDados.email,
             senha: userDados.senha
-        }, {withCredentials: true}, headers)
+        }, headers)
             .then((response) => {
                 if (response.data.cadastrado) {
                     setAtivarMensagemBD(true)
@@ -183,7 +183,7 @@ export const ContextBase = ({ children }) => {
         api.post("/login", {
             email: userDados.email,
             senha: userDados.senha
-        }, {withCredentials: true}, headers)
+        }, headers)
             .then((response) => {
                 // Quando o Admin ou o User forem confirmados, além de salvar os seus dados em um State, foi resgatado o Token recebido do servidor e salvo lo localStorage do Browser, para servir de parâmetro de instanciamento da sessão
                 if (response.data.loginAdmin) {
@@ -217,7 +217,7 @@ export const ContextBase = ({ children }) => {
             }
         }
 
-        api.get("/logout", {withCredentials: true}, headers)
+        api.get("/logout", headers)
             .then((response) => {
                 // Ativando mensagem e eliminando o Token, caso ele ainda estiver ativo
                 // Forçar o auxiliar sessãoAtiva para false, evitando um bug de análise por conta de renderização e carregamento dos dados da sessão
